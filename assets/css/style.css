@@ -1,0 +1,12 @@
+.hero-block {
+    max-height: 200px;
+}
+
+.jumbotron {
+    background-image: url("../images/stdata.png");
+    min-height: 300px;
+    color: var(--ice-blue);
+    text-align: center;
+}
+
+
