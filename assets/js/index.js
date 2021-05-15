@@ -13,32 +13,29 @@ const mirrorUniversEl = document.querySelector("#mirror-universe");
 // calls addToSavedCities to save the city name for display with the other
 // previously searched cities 
 function getTrekCharacter(characterName, mirrorUniverse, alternateReality) {
-    var apiURL = "http://stapi.co/api/v1/rest/character/search";
-
-
-// data to be sent to the POST request
-    let _data = {
-        name: characterName,
-        mirror: mirrorUniverse, 
-        alternateReality: alternateReality
+    var apiURL = "http://stapi.co/api/v1/rest/character/search?name=" + characterName;
+    if (!mirrorUniverse) {
+        apiURL += '&mirror=false';
     }
-  
-    fetch("apiURL", {
-        method: "POST",
-        body: JSON.stringify(_data),
-        headers: {"Content-type": "application/json; charset=UTF-8"}
-    })
-    .then(response => {   
-        console.log(response); 
-        // return response.json();
-    })
-    .then(data => {
-        if (data.errors) {
-        errorEl.textContent = "Missing Information";
+    if (!alternateReality) {
+        apiURL += '&alternateReality=false'
+    }
+
+    console.log("apiURL= " + apiURL);
+
+    fetch(apiURL, { method: "POST" })
+    .then(function (response) {
+        if (response.ok) {
+            response.json().then(function (data) {
+                console.log(data);
+            });
+        } else {
+            alert('Error: ' + response.statusText);
         }
     })
-    .catch(err => {
-        console.log(err);
+    .catch(function (error) {
+        alert('Unable to connect to OpenWeather API for Forecast');
+        console.log(error);
     });
 };
 
