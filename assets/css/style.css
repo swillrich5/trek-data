@@ -4,7 +4,7 @@
 
 .jumbotron {
     background-image: url("../images/stdata.png");
-    min-height: 300px;
+    min-height: 200px;
     color: var(--ice-blue);
     text-align: center;
 }
